@@ -1,25 +1,30 @@
 <template>
   <div id="app">
-    <LogIn msg="Welcome to Your Vue.js App"/>
+
+    
+        <nav>
+            <router-link to="/login">login</router-link>
+        </nav>
+
+    <router-view/>
   </div>
+
+  
 </template>
 
 <script>
-import LogIn from './views/LogIn.vue'
 import firebase from 'firebase/compat/app';
 import 'firebase/compat/auth';
 
-
-
 export default {
   name: 'App',
-  components: {
-    LogIn
-  }, 
+   
   mounted(){
     firebase.auth().createUserWithEmailAndPassword('lana@gmail.com', '1234567').then(
-      function(user){
-        console.log('user created', user)
+      (userCredential) => {
+    // Signed in 
+    const user = userCredential.user;
+    // ...
 
       }, 
       function(err){

@@ -1,7 +1,8 @@
-import Vue from 'vue'
-import App from './App.vue'
+import Vue from 'vue';
+import App from './App.vue';
 import firebase from 'firebase/compat/app';
-
+import VueRouter from "vue-router";
+import router from "./router/index.js";
 
 const firebaseConfig = {
   apiKey: "AIzaSyAwOKTdRgc6_ZWxbtpVFoqlcg5V4dMTQZ0",
@@ -14,7 +15,10 @@ const firebaseConfig = {
 firebase.initializeApp(firebaseConfig)
 
 Vue.config.productionTip = false
+Vue.use(VueRouter)
+
 
 new Vue({
-  render: h => h(App),
-}).$mount('#app')
+  router,
+  render: h => h(App)
+}).$mount("#app");

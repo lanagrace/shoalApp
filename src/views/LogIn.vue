@@ -1,37 +1,43 @@
 <template>
-    <div class="container">
-        <form>
-            <div class="row">
-                <div class="twelve columns">
-                    <img id="logoImg" src="/assets/logo.png" alt="Logo">
-                    <h1 id="name">Shoal</h1>
-                </div>
-            </div>
-            <div class="row">
-            
-            <div class="six columns">
-                <label for="exampleEmailInput">Your email</label>
-                <input class="u-full-width" type="email" placeholder="test@mailbox.com" id="exampleEmailInput">
-            </div>
-            </div>
-            <div class="row">
-            <div class="six columns">
-                <label for="exampleEmailInput">Your password</label>
-                <input class="u-full-width" type="password" placeholder="password" id="examplePasswordInput">
-            </div>
-            </div>
-            
-            <a href="/mainPage.html"><input class="button-primary" type="button" value="Login"> </a> 
-            <a href="/signUp.html"><input class="button-primary" type="button" value="Sign Up"> </a> 
-
-        </form>
+   <div>   
+        <form @submit.prevent="login">     
+            <h2>Login</h2>     
+            <input       
+            type="email"       
+            placeholder="Email address..."       
+            v-model="email"     
+            />     
+            <input       
+            type="password"       
+            placeholder="password..."       
+            v-model="password"     
+            />     
+            <button type="submit">
+            Login
+            </button>   
+        </form> 
     </div>
       
 </template>
 
 <script>
 export default {
+    methods: {
+  login() {
+    firebase
+      .auth()
+      .signInWithEmailAndPassword(this.email, this.password)
+      .then(() => {
+        alert('Successfully logged in');
+        this.$router.push('/dashboard');
+      })
+      .catch(error => {
+        alert(error.message);
+      });
+  },
 
+  
+},
 }
 </script>
 
@@ -52,5 +58,9 @@ export default {
     #map{
         height: 70vh;
     }
+
+    input {   
+  margin-right: 20px; 
+}
 
 </style>
