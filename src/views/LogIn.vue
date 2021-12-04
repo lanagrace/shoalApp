@@ -1,66 +1,67 @@
 <template>
-   <div>   
-        <form @submit.prevent="login">     
-            <h2>Login</h2>     
-            <input       
-            type="email"       
-            placeholder="Email address..."       
-            v-model="email"     
-            />     
-            <input       
-            type="password"       
-            placeholder="password..."       
-            v-model="password"     
-            />     
-            <button type="submit">
-            Login
-            </button>   
-        </form> 
-    </div>
-      
+  <div>
+    <form @submit.prevent="login">
+      <h2>Login</h2>
+      <input type="email" placeholder="Email address..." v-model="email" />
+      <input type="password" placeholder="password..." v-model="password" />
+      <button @click="login()">Login</button>
+    </form>
+    <router-link to="/register">register</router-link>
+  </div>
 </template>
 
 <script>
-export default {
-    methods: {
-  login() {
-    firebase
-      .auth()
-      .signInWithEmailAndPassword(this.email, this.password)
-      .then(() => {
-        alert('Successfully logged in');
-        this.$router.push('/dashboard');
-      })
-      .catch(error => {
-        alert(error.message);
-      });
-  },
+import firebase from "firebase/compat/app";
+import "firebase/compat/auth";
 
-  
-},
-}
+/* checks if user credentials match with the ones in our database; 
+opens a dashboard page if they do */
+export default {
+  data() {
+    return {
+      email: "",
+      password: "",
+    };
+  },
+  methods: {
+    login() {
+      firebase
+        .auth()
+        .signInWithEmailAndPassword(this.email, this.password)
+        .then((response) => {
+          alert("Successfully logged in");
+          console.log(response);
+          this.$router.push("/dashboard");
+        })
+        .catch((error) => {
+          alert(error.message);
+        });
+      
+    },
+  },
+};
 </script>
 
 <style>
 
-    #logoImg{
-        margin-bottom: 5vh;
-        width: 60%;
-        justify-content: center;
-        align-items: center;
-    }
-
-    #name{
-        justify-content: center;
-        align-items: center;
-    }
-
-    #map{
-        height: 70vh;
-    }
-
-    input {   
-  margin-right: 20px; 
+/* add css here */
+#logoImg {
+  margin-bottom: 5vh;
+  width: 60%;
+  justify-content: center;
+  align-items: center;
 }
 
+#name {
+  justify-content: center;
+  align-items: center;
+}
+
+#map {
+  height: 70vh;
+}
+
+input {
+  margin-right: 20px;
+}
 </style>

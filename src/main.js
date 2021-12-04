@@ -4,6 +4,8 @@ import firebase from 'firebase/compat/app';
 import VueRouter from "vue-router";
 import router from "./router/index.js";
 
+/* firebase is configured here */
+
 const firebaseConfig = {
   apiKey: "AIzaSyAwOKTdRgc6_ZWxbtpVFoqlcg5V4dMTQZ0",
   authDomain: "shoal-befdc.firebaseapp.com",

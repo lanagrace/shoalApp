@@ -1,5 +1,6 @@
 <template>
   <div>
+    <!-- this is the register form -->
   <form @submit.prevent="register">
     <h2>Register</h2>
     <input
@@ -12,12 +13,18 @@
       placeholder="password..."
       v-model="password"
     />
-    <button type="submit">Register</button>
+    <button @click="register()">Register</button>
   </form>
+
+<!-- roter-link adds a link/button to a wanted page -->
+<!--  <router-link to="/login">login</router-link> -->
 </div>
 </template>
 
 <script>
+/* sends data (email and password) to firebase and saves it there - creates a new user */
+import firebase from 'firebase/compat/app';
+import 'firebase/compat/auth';
 export default {
     data() { 
   return { 
@@ -30,12 +37,12 @@ methods: {
     firebase
       .auth()
       .createUserWithEmailAndPassword(this.email, this.password)
-      then(() => {
+      .then(() => {
         alert('Successfully registered! Please login.');
         this.$router.push('/login');
       })
       .catch(error => {
-        alert(error.message);
+        console.log(error.message);
       });
   },
 },
@@ -43,6 +50,8 @@ methods: {
 }
 </script>
 
-<style>
 
+
+<style>
+  /* add css here */
 </style>
