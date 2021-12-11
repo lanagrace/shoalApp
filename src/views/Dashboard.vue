@@ -4,7 +4,6 @@
     <p>This page is only visible to users that are currently logged in</p>
     <p>This is where the map goes</p>
     <p>User: {{ email }}</p>
-    <button @click="signout()">Sign out</button>
   </div>
 </template>
 

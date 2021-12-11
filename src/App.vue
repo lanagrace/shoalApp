@@ -1,9 +1,19 @@
 <template>
   <div id="app">
-    <!-- login from the navbar -->
-    <nav>
+    <!-- navbar that is on every page -->
+    <nav class="nav-wrapper">
       <!-- v-if stops it from being visible while we're on login page -->
-      <router-link v-if="$route.name != 'Login'" to="/login">login</router-link>
+      <!-- 
+        add icons, on profile page an arrow to go back to the map, on map a 
+        profile icon 
+       -->
+      <router-link v-if="$route.name != 'Login'" to="/login">Login</router-link>
+      <router-link v-if="$route.name != 'Login'" to="/profile"
+        >Profile</router-link
+      >
+      <router-link v-if="$route.name != 'Login'" to="/dashboard"
+        >Dashboard</router-link
+      >
     </nav>
 
     <router-view />

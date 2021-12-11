@@ -1,10 +1,10 @@
 <template>
-  <div>
+  <div class="container">
     <form @submit.prevent="login">
       <h2>Login</h2>
-      <input type="email" placeholder="Email address..." v-model="email" />
-      <input type="password" placeholder="password..." v-model="password" />
-      <button @click="login()">Login</button>
+      <input type="email" placeholder="Email address" v-model="email" />
+      <input type="password" placeholder="Password" v-model="password" />
+      <button class="waves-effect waves-light btn" @click="login()">Login</button>
     </form>
     <router-link to="/register">register</router-link>
   </div>

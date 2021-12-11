@@ -1,19 +1,23 @@
 <template>
-  <div>
+  <div class="container">
     <!-- this is the register form -->
   <form @submit.prevent="register">
     <h2>Register</h2>
     <input
+      type="text"
+      placeholder="Name"
+    />
+    <input
       type="email"
-      placeholder="Email address..."
+      placeholder="Email address"
       v-model="email"
     />
     <input
       type="password"
-      placeholder="password..."
+      placeholder="Password"
       v-model="password"
     />
-    <button @click="register()">Register</button>
+    <button class="waves-effect waves-light btn" @click="register()">Register</button>
   </form>
 
 <!-- roter-link adds a link/button to a wanted page -->
