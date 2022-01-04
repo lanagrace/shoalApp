@@ -6,7 +6,8 @@
       <input type="password" placeholder="Password" v-model="password" />
       <button class="waves-effect waves-light btn" @click="login()">Login</button>
     </form>
-    <router-link to="/register">register</router-link>
+    <p>Don't have an account? </p>
+    <router-link to="/register">Register</router-link>
   </div>
 </template>
 

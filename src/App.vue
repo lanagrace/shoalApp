@@ -23,24 +23,34 @@
 <script>
 import "firebase/compat/auth";
 import firebase from "firebase/compat/app";
+import M from 'materialize-css';
+
 
 /* should recognise if a user is logged in and open a dashboard or login page */
 export default {
   name: "App",
   mounted() {
-    firebase.auth().onAuthStateChanged((user) => {
-      if (user) {
-        // User is signed in, see docs for a list of available properties
-        // https://firebase.google.com/docs/reference/js/firebase.User
-        var uid = user.uid;
-        console.log(uid);
-        this.$router.push("/dashboard");
-      } else {
-        // User is signed out
-        this.$router.push("/login");
+    M.AutoInit()
+ firebase.auth().onAuthStateChanged(async user => {
+    if (user) {
+        const lastSignInTime = new Date(user.metadata.lastSignInTime);
+        const lastSignInTimeTimeStamp = Math.round(lastSignInTime.getTime() / 1000);
+        const yesterdayTimeStamp = Math.round(new Date().getTime() / 1000) - (24 * 3600);
+        if(lastSignInTimeTimeStamp < yesterdayTimeStamp){
+          await firebase.auth().signOut()
+          this.setState({
+            loggedIn: false
+          });
+          return false;
+        }
+        this.setState({
+          loggedIn: true,
+          user
+        });
       }
     });
   },
+  
 };
 </script>
 
@@ -52,5 +62,9 @@ export default {
   text-align: center;
   color: #2c3e50;
   margin-top: 60px;
+}
+
+.nav-wrapper{
+  background-color: #274c77;
 }
 </style>

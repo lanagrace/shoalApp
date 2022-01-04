@@ -3,59 +3,76 @@
     <div class="row">
       <!-- add an icon instead? -->
       <div class="col s6">
-        <h6 class="center-align">Profile picture</h6>
+        <i class="material-icons prefix">account_circle</i>
       </div>
       <div class="col s6">
         <p>User: {{ email }}</p>
-        <p>user bio</p>
+        <input type="text" placeholder="Biography" v-model="bio" />
+        <button class="waves-effect blue btn" @click="updateProfile()">
+          Add
+        </button>
       </div>
     </div>
-    <div class="row">
-      <div class="col s12">
-        <div class="card horizontal">
-          <div class="card-stacked">
-            <div class="card-content">
-              <p>User's emergency contacts</p>
-            </div>
-            <div class="card-action">
-              <a>Add contacts</a>
-            </div>
-          </div>
-        </div>
-      </div>
-      <div class="col s12">
-        <div class="card horizontal">
-          <div class="card-stacked">
-            <div class="card-content">
-              <p>User's saved locations</p>
-            </div>
-            <div class="card-action">
-              <a>Add location</a>
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
+
+    <h4>Emergency contacts</h4>
+    <input type="text" placeholder="Add contacts" v-model="emergencyContact" />
+    <button class="waves-effect blue btn" @click="updateProfile()">Add</button>
+    <h4>Locations</h4>
+    <input type="text" placeholder="Add location" v-model="locations" />
+    <button class="waves-effect blue btn" @click="updateProfile()">Add</button>
+
     <button @click="signout()">Sign out</button>
   </div>
 </template>
 
 <script>
 import "firebase/compat/auth";
-
+import { db } from "../db.js";
 import firebase from "firebase/compat/app";
+/* 
+var users = db.collection("users").doc();
+import { db } from "../db.js"; */
+
+/* check out koji je trenutni user id
+proc kroz database ako se matchaju
+kad se nade match onda prikazi to i to */
 
 export default {
   data() {
     return {
       email: "",
       password: "",
+      bio: "",
+      name: "",
+      emergencyContact: "",
+      locations: "",
     };
   },
   mounted() {
-    firebase.auth().onAuthStateChanged((user) => {
+   
+  },
+  methods: {
+    getUserData(){
+       firebase.auth().onAuthStateChanged((user) => {
       if (user) {
         this.email = user.email;
+
+        var docRef = db.collection("users").doc(user.uid);
+
+        docRef
+          .get()
+          .then((doc) => {
+            if (doc.exists) {
+              console.log("Document data:", doc.data());
+            } else {
+              // doc.data() will be undefined in this case
+              console.log("No such document!");
+            }
+          })
+          .catch((error) => {
+            console.log("Error getting document:", error);
+          });
+
         // User is signed in, see docs for a list of available properties
         // https://firebase.google.com/docs/reference/js/firebase.User
       } else {
@@ -63,8 +80,26 @@ export default {
         this.$router.push("/login");
       }
     });
-  },
-  methods: {
+    },
+    /* in the wrong place */
+    updateUser() {
+      let user = firebase.auth().currentUser;
+      user
+        .updateProfile({
+          bio: this.bio,
+          emergencyContacts: this.emergencyContacts,
+          locations: this.locations,
+        })
+        .then(
+          function () {
+            var bio = user.bio;
+            console.log(bio);
+          },
+          function (error) {
+            console.log(error);
+          }
+        );
+    },
     signout() {
       firebase
         .auth()
@@ -89,5 +124,9 @@ export default {
   justify-content: center;
   align-content: center;
   background-color: salmon;
+}
+
+.row {
+  padding: 0;
 }
 </style>

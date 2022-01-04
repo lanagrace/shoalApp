@@ -18,6 +18,7 @@ const firebaseConfig = {
 };
 firebase.initializeApp(firebaseConfig)
 
+
 Vue.config.productionTip = false
 Vue.use(VueRouter)
 
