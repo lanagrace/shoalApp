@@ -61,6 +61,7 @@ import "firebase/compat/firestore";
 import { db } from "../db.js";
 
 export default {
+  
   data() {
     return {
       email: "",
@@ -100,3 +101,5 @@ export default {
 <style>
 /* add css here */
 </style>
+
+
