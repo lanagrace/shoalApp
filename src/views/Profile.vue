@@ -3,31 +3,38 @@
     <div class="row">
       <!-- add an icon instead? -->
       <div class="col s6">
+        <!-- icon represents the profile picture -->
         <i class="material-icons prefix">account_circle</i>
       </div>
       <div class="col s6">
+        <!-- shows users name on the profile page -->
         <p>User: {{ name }}</p>
+        <!-- when this icon is clicked you enter edit mode and can change your bio -->
         <i class="material-icons" @click="editMode">edit</i>
         <div v-if="edit">
           <input type="text" placeholder="Biography" v-model="bio_input" />
+          <!-- this button adds your new bio to the database -->
           <button class="waves-effect blue btn" @click="updateProfile()">
             Add
           </button>
         </div>
 
         <div v-if="!edit">
+          <!-- this p tag shows the current bio -->
           <p>Bio: {{ bio }}</p>
         </div>
       </div>
     </div>
 
     <h4>Emergency contacts</h4>
+    <!-- ul tag creates a list of contacts, this can be changed to something else -->
     <ul>
       <li v-for="contact in emergencyContactArr" :key="contact" >{{ contact }}</li>
     </ul>
     <input type="text" placeholder="Add contacts" v-model="emergencyContact" />
     <button class="waves-effect blue btn" @click="addContact()">Add</button>
     <h4>Locations</h4>
+    <!-- ul tag creates a list of locations, this can be changed to something else -->
     <ul>
       <li v-for="location in locationsArr" :key="location" >{{ location }}</li>
     </ul>
