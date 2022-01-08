@@ -58,10 +58,6 @@ export default {
   align-items: center;
 }
 
-#map {
-  height: 70vh;
-}
-
 input {
   margin-right: 20px;
 }
