@@ -1,12 +1,8 @@
 <template>
   <div>
-    <h2>Dashboard</h2>
-        <div class="container">
-    </div>
-    <p>This page is only visible to users that are currently logged in</p>
+    <p>Find people nearby!</p>
     <!-- <p>This is where the map goes</p> -->
    <iframe width='100%' height='400px' src="https://api.mapbox.com/styles/v1/joejonesss/ckwscy5ke335v14mknvu5az7w.html?title=false&access_token=pk.eyJ1Ijoiam9lam9uZXNzcyIsImEiOiJja3dzY3dha3YxNTc1MnZsY2lrMXlnYWJmIn0.rbYKWeIOJdf5fjPFKuHNLA&zoomwheel=true&fresh=true#12.93/50.3756/-4.1301" title="shoalThemedMap" style="border:none;"></iframe>
-    <p>User: {{ email }}</p>
   </div>
 </template>
 

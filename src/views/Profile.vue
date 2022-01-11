@@ -1,14 +1,14 @@
 <template>
-  <div class="container">
+   <div class="container2">
     <div class="row">
       <!-- add an icon instead? -->
       <div class="col s6">
         <!-- icon represents the profile picture -->
-        <i class="material-icons prefix">account_circle</i>
+        <i class="rounded-button"><ion-icon1 name="person-circle-outline"></ion-icon1></i>
       </div>
-      <div class="col s6">
+      <div class="cols6">
         <!-- shows users name on the profile page -->
-        <p>User: {{ name }}</p>
+        <p>{{ name }}</p>
         <!-- when this icon is clicked you enter edit mode and can change your bio -->
         <i class="material-icons" @click="editMode">edit</i>
         <div v-if="edit">
@@ -32,17 +32,20 @@
       <li v-for="contact in emergencyContactArr" :key="contact" >{{ contact }}</li>
     </ul>
     <input type="text" placeholder="Add contacts" v-model="emergencyContact" />
-    <button class="waves-effect blue btn" @click="addContact()">Add</button>
+    <button class="btn-Confirm" @click="addContact()">Add</button>
     <h4>Locations</h4>
     <!-- ul tag creates a list of locations, this can be changed to something else -->
     <ul>
       <li v-for="location in locationsArr" :key="location" >{{ location }}</li>
     </ul>
     <input type="text" placeholder="Add location" v-model="locations" />
-    <button class="waves-effect blue btn" @click="addLocation()">Add</button>
+    <button class="btn-Confirm" @click="addLocation()">Add</button>
 
-    <button @click="signout()">Sign out</button>
+    <div>
+    <button class="btn-Cancel" @click="signout()">Sign out</button>
   </div>
+  </div>
+  
 </template>
 
 <script>
@@ -109,7 +112,7 @@ export default {
     editMode() {
       this.edit = !this.edit;
     },
-    /* in the wrong place */
+    
     updateProfile() {
       firebase.auth().onAuthStateChanged((user) => {
         if (user) {
@@ -200,15 +203,103 @@ export default {
 </script>
 
 <style>
-.center-align {
-  width: 100%;
-  height: 15vh;
-  justify-content: center;
-  align-content: center;
-  background-color: salmon;
-}
 
 .row {
   padding: 0;
 }
+
+.rounded-button {
+  width: 175px;
+  height: 175px;
+  background: linear-gradient(144deg,#ceb8c9,#9E788F);
+  color: #ffffff;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  border-radius: 50%;
+  border: none;
+  text-decoration: none;
+  
+  
+}
+
+.rounded-button:hover {
+  background: linear-gradient(144deg,#a3cef1, #274c77);
+  color: black;
+}
+
+.ion-icon1{
+  font-size: 175px;
+}
+
+.col.s6{
+  padding: 10px;
+  text-align: center;
+  margin: 2px;
+  
+}
+.cols6{
+  padding-top: 14px;
+  font-size: 20px;
+  text-align: left;
+  border-bottom: 2px solid black;
+}
+
+.col-s6{
+  padding-top: 140px;
+}
+
+.container2{
+  position: absolute;
+  padding-bottom: 20px;
+  padding-left: 0px ;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  background: #9E788F;
+  border-radius: 10px;
+  text-align: center;
+  box-shadow: 0 3px 8px;
+  background-image: linear-gradient(-180deg, #a3cef1, #274c77);
+  width: 500px;
+  height: 600px;
+}
+
+.container2 form{
+  padding: 20px;
+  box-sizing: border-box;
+  align-items: center;
+}
+
+.btn-Confirm {
+    background-color: initial;
+    background-image: linear-gradient(-180deg, #5bd84a, #3e9732);
+    border-radius: 6px;
+    color: #FFFFFF;
+    cursor: pointer;
+    font-family: 'Ubuntu', sans-serif;
+    line-height: 40px;
+    text-align: center;
+    transition: box-shadow .2s;
+      
+  }
+  .btn-Confirm:hover {
+      box-shadow: rgba(98, 252, 59, 0.974) 0 3px 8px;
+    }
+
+  .btn-Cancel {
+        background-image: linear-gradient(-180deg, #f35555, #ac2121);
+        margin-top: 3vh;
+        border-radius: 6px;
+        color: #FFFFFF;
+        cursor: pointer;
+        font-family: 'Ubuntu', sans-serif;
+        line-height: 40px;
+        text-align: center;
+        transition: box-shadow .2s; 
+      }
+      .btn-Cancel:hover {
+          box-shadow: rgba(233, 17, 17, 0.974) 0 3px 8px;
+        }
 </style>

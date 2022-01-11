@@ -3,6 +3,7 @@ import Login from "../views/LogIn.vue"
 import Register from "../views/Register.vue"
 import Dashboard from "../views/Dashboard.vue"
 import Profile from "../views/Profile.vue"
+import Home from "../views/Home.vue"
 
 
 
@@ -20,6 +21,7 @@ import Profile from "../views/Profile.vue"
 
 export default new VueRouter({
   routes: [
+    { name: 'Home', path: '/', component: Home },
     { name: 'Login', path: '/login', component: Login },
     { path: '/register', component: Register },
     { path: '/dashboard', component: Dashboard },
