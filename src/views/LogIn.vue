@@ -37,13 +37,12 @@ export default {
         .auth()
         .signInWithEmailAndPassword(this.email, this.password)
         .then((response) => {
-          alert("Successfully logged in");
           console.log(response);
           /* if the user exists this router will open the dashboard page */
           this.$router.push("/dashboard");
         })
         .catch((error) => {
-          alert(error.message);
+          console.log(error)
         });
       
     },

@@ -1,5 +1,6 @@
 import Vue from 'vue';
 import App from './App.vue';
+import store from './store'
 import firebase from 'firebase/compat/app';
 import VueRouter from "vue-router";
 import router from "./router/index.js";
@@ -22,8 +23,13 @@ firebase.initializeApp(firebaseConfig)
 Vue.config.productionTip = false
 Vue.use(VueRouter)
 
+firebase.auth().onAuthStateChanged(user => {
+  store.dispatch("fetchUser", user);
+});
+
 
 new Vue({
   router,
+  store,
   render: h => h(App)
 }).$mount("#app");

@@ -24,7 +24,7 @@
       </div>
     </div>
 
-    <h4>Emergency contacts</h4>
+    <h6>Emergency contacts</h6>
     <!-- ul tag creates a list of contacts -->
     <ul>
       <li v-for="contact in emergencyContactArr" :key="contact" >{{ contact }}</li>
@@ -32,7 +32,7 @@
     <input type="text" placeholder="Add contacts" v-model="emergencyContact" />
     <!-- this button sends new data to the database -->
     <button class="btn-Confirm" @click="addContact()">Add</button>
-    <h4>Locations</h4>
+    <h6>Locations</h6>
     <!-- ul tag creates a list of locations-->
     <ul>
       <li v-for="location in locationsArr" :key="location" >{{ location }}</li>
