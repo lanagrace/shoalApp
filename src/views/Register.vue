@@ -3,6 +3,8 @@
     <h4>Register</h4>
     <!-- this is the register form -->
     <form @submit.prevent="register" id="signup-form">
+
+      <!-- v-model is binding the data inside the input to the variables in data() -->
       <div class="row">
         <div class="col s6">
           <input
@@ -44,13 +46,12 @@
           <span>By proceeding I agree to Shoal Terms and Conditions</span>
         </label>
       </p>
+      <!-- @click calls the function register() -->
       <button class="btn-Confirm" @click="register()">
         Register
       </button>
     </form>
   </div>
-  <!-- roter-link adds a link/button to a wanted page -->
-  <!--  <router-link to="/login">login</router-link> -->
 </template>
 
 <script>
@@ -72,12 +73,15 @@ export default {
     };
   },
   methods: {
+    /* creates a new user */
     register() {
       firebase
         .auth()
         .createUserWithEmailAndPassword(this.email, this.password)
         .then((cred) => {
           console.log(cred);
+          /* saves data to the firebase database using user's id number 
+          (creates a new collection for every user) */
           db.collection("users").doc(cred.user.uid).set({
             name: this.name,
             lastName: this.lastName,

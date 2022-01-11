@@ -5,10 +5,8 @@
     <nav class="nav-wrapper">
       <!-- v-if stops it from being visible while we're on that page -->
       
-      <router-link v-if="$route.name != 'Home'" to="/login">Login</router-link>
-      <router-link v-if="$route.name != 'Home'" to="/register">Register</router-link>
-      <router-link v-if="$route.name != 'Home'" to="/profile">Profile</router-link>
       <router-link v-if="$route.name != 'Home'" to="/dashboard">Dashboard</router-link>
+      <router-link v-if="$route.name != 'Home'" to="/profile">Profile</router-link>
 
     </nav>
 
@@ -55,18 +53,6 @@ export default {
 
 <style>
 /* add css here */
-
-.starth4{
-  padding: 20px;
-  text-align: center;
-  background: #274c77;
-  color: white;
-}
-
-.starth1{
-  text-align: center;
-  background: white;
-}
 
 .nav-wrapper {
   background-image: linear-gradient(-180deg, #ceb8c9, #9E788F);

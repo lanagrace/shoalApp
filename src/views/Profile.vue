@@ -1,9 +1,7 @@
 <template>
    <div class="container2">
     <div class="row">
-      <!-- add an icon instead? -->
       <div class="col s6">
-        <!-- icon represents the profile picture -->
         <i class="rounded-button"><ion-icon1 name="person-circle-outline"></ion-icon1></i>
       </div>
       <div class="cols6">
@@ -27,18 +25,20 @@
     </div>
 
     <h4>Emergency contacts</h4>
-    <!-- ul tag creates a list of contacts, this can be changed to something else -->
+    <!-- ul tag creates a list of contacts -->
     <ul>
       <li v-for="contact in emergencyContactArr" :key="contact" >{{ contact }}</li>
     </ul>
     <input type="text" placeholder="Add contacts" v-model="emergencyContact" />
+    <!-- this button sends new data to the database -->
     <button class="btn-Confirm" @click="addContact()">Add</button>
     <h4>Locations</h4>
-    <!-- ul tag creates a list of locations, this can be changed to something else -->
+    <!-- ul tag creates a list of locations-->
     <ul>
       <li v-for="location in locationsArr" :key="location" >{{ location }}</li>
     </ul>
     <input type="text" placeholder="Add location" v-model="locations" />
+    <!-- this button sends new data to the database -->
     <button class="btn-Confirm" @click="addLocation()">Add</button>
 
     <div>
@@ -52,9 +52,6 @@
 import "firebase/compat/auth";
 import { db } from "../db.js";
 import firebase from "firebase/compat/app";
-/* 
-var users = db.collection("users").doc();
-import { db } from "../db.js"; */
 
 export default {
   data() {
@@ -100,8 +97,6 @@ export default {
               console.log("Error getting document:", error);
             });
 
-          // User is signed in, see docs for a list of available properties
-          // https://firebase.google.com/docs/reference/js/firebase.User
         } else {
           // User is signed out
           this.$router.push("/login");
@@ -109,6 +104,8 @@ export default {
       });
     },
 
+    /* value of edit variable is false, once the pencil icon is clicked
+    it will call this function and the value will turn into true */
     editMode() {
       this.edit = !this.edit;
     },
@@ -144,6 +141,8 @@ export default {
           /* if it says set, the array will only have one string; if it says update, it wil contain more strings */
           docRef.update({
               emergencyContact:
+              /* arrayUnion is a method which updates the array in this case
+              our list of emergency contacts */
                 firebase.firestore.FieldValue.arrayUnion(this.emergencyContact),
             })
             .then(() => {
@@ -168,6 +167,8 @@ export default {
           /* if it says set, the array will only have one string; if it says update, it wil contain more strings */
           docRef.update({
               locations:
+              /* does the same thing as for the emergency contacts, but is updating
+              a list of locations */
                 firebase.firestore.FieldValue.arrayUnion(this.locations),
             })
             .then(() => {

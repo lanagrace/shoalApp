@@ -32,12 +32,14 @@ export default {
   },
   methods: {
     login() {
+      /* uses firebase authentication to check if the user exists and logs them in */
       firebase
         .auth()
         .signInWithEmailAndPassword(this.email, this.password)
         .then((response) => {
           alert("Successfully logged in");
           console.log(response);
+          /* if the user exists this router will open the dashboard page */
           this.$router.push("/dashboard");
         })
         .catch((error) => {
